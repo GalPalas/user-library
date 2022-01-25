@@ -6,19 +6,19 @@ const userList = createSlice({
   name: "userList",
   initialState: {
     users: [],
-    loading: false,
+    status: "idle",
   },
   reducers: {
     userRequest: (userList, action) => {
-      userList.loading = true;
+      userList.status = "loading";
     },
     userSuccess: (userList, action) => {
       userList.users = action.payload;
-      userList.loading = false;
+      userList.status = "success";
     },
     userFail: (userList, action) => {
       userList.error = action.payload;
-      userList.loading = false;
+      userList.status = "error";
     },
   },
 });
