@@ -6,8 +6,8 @@ import { fetchUsers, getUserInfo } from "store/users";
 
 const Users = () => {
   const dispatch = useDispatch();
-  const { loading, users } = useSelector(getUserInfo());
-  console.log(loading, users);
+  const { users, status } = useSelector(getUserInfo());
+  console.log(status, users);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -15,7 +15,17 @@ const Users = () => {
 
   return (
     <div>
-      <UserCard />
+      {status === "success" && users.length ? (
+        <div className="container p-5">
+          <div className="row">
+            {users.map((user) => (
+              <UserCard key={user.id.value} {...user} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <h2>Loading...</h2>
+      )}
     </div>
   );
 };
