@@ -1,17 +1,17 @@
-import axios from "axios";
+// import axios from "axios";
 import UserCard from "components/userCard/UserCard";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers, getUserInfo } from "store/users";
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
+  const { loading, users } = useSelector(getUserInfo());
+  console.log(loading, users);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const { data } = await axios.get("https://randomuser.me/api/?results=10");
-      setUsers(data.results);
-    };
-    fetchUsers();
-  }, []);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   return (
     <div>
