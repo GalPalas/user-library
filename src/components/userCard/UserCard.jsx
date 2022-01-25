@@ -1,3 +1,4 @@
+import AddUser from "components/addUser/AddUser";
 import EditUser from "components/editUser/EditUser";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -41,6 +42,7 @@ const UserCard = ({ id, name, email, picture, location, gender }) => {
       </div>
 
       <EditUser />
+      <AddUser />
     </div>
   );
 };

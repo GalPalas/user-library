@@ -25,13 +25,17 @@ const userList = createSlice({
         (user) => user.id.value !== action.payload
       );
     },
+
+    useradded: (userList, action) => {
+      userList.users.push(action.payload);
+    },
     userEdit: (userList, action) => {
       console.log("edit");
     },
   },
 });
 
-const { userRequest, userSuccess, userFail, userRemoved, userEdit } =
+const { userRequest, userSuccess, userFail, userRemoved, useradded, userEdit } =
   userList.actions;
 
 export default userList.reducer;
@@ -48,6 +52,10 @@ export const fetchUsers = () => async (dispatch) => {
 
 export const removeUser = (id) => async (dispatch) => {
   dispatch(userRemoved(id.value));
+};
+
+export const addUser = (user) => async (dispatch) => {
+  dispatch(useradded(user));
 };
 
 export const editUser = (id) => async (dispatch) => {

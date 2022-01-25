@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-light bg-light">
+    <nav className="navbar navbar-dark bg-dark">
       <div className="container-fluid">
-        <span className="navbar-brand mb-0 h1">User Library</span>
+        <Link to="/" className="navbar-brand mb-0 h1">
+          User Library
+        </Link>
       </div>
     </nav>
   );
