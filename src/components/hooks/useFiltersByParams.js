@@ -11,7 +11,6 @@ export const useFiltersByParams = (users) => {
   let filteredUsers = users;
   if ((name || email || country) && users.length) {
     filteredUsers = users.filter((user) => {
-      console.log(user);
       if (name && !user.name.first.toLowerCase().includes(name.toLowerCase())) {
         return false;
       }

@@ -5,6 +5,7 @@ import { useFiltersByParams } from "components/hooks/useFiltersByParams";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, getUserInfo } from "store/users";
+import Spinner from "components/Spinner";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Users = () => {
               <button
                 className="btn btn-secondary btn-lg"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                data-bs-target="#addUserModal"
               >
                 Add User
               </button>
@@ -40,7 +41,7 @@ const Users = () => {
           </div>
         </div>
       ) : (
-        <h2>Loading...</h2>
+        <Spinner />
       )}
     </div>
   );

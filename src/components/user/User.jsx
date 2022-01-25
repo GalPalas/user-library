@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserById, getUserInfoById } from "store/user";
 import { useParams } from "react-router-dom";
 import "./User.css";
+import Spinner from "components/Spinner";
 
 const User = () => {
   const { id } = useParams();
@@ -55,7 +56,7 @@ const User = () => {
           </div>
         </div>
       ) : (
-        <h2>Loading...</h2>
+        <Spinner />
       )}
     </div>
   );

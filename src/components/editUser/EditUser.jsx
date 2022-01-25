@@ -2,40 +2,40 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { nanoid } from "nanoid";
+import { useDispatch } from "react-redux";
+import { addUser } from "store/users";
 
-const schema = yup
-  .object({
-    title: yup.string(),
-    firstName: yup.string().min(3, "must be at least 3 characters long"),
-    lastName: yup.string(),
-    email: yup.string().email(),
-    country: yup.string(),
-    city: yup.string(),
-    street: yup.string(),
-  })
-  .required();
+const schema = yup.object({
+  id: yup.string().required(),
+  title: yup.string().required(),
+  firstName: yup.string().min(3, "must be at least 3 characters long"),
+  lastName: yup.string().required(),
+  email: yup.string().email().required(),
+  country: yup.string().required(),
+  city: yup.string().required(),
+  street: yup.string().required(),
+});
 
-const EditUser = () => {
+const AddUser = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-
-  const onSubmit = (data) => console.log(data);
-
   return (
     <div
       className="modal fade"
-      id="editModal"
+      id="editUserModal"
       tabIndex="-1"
-      aria-labelledby="editModalLabel"
+      aria-labelledby="editUserModalLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog modal-dialog-scrollable">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="editModalLabel">
+            <h5 className="modal-title" id="exampleModalLabel">
               Edit User
             </h5>
             <button
@@ -46,7 +46,46 @@ const EditUser = () => {
             ></button>
           </div>
           <div className="modal-body">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+              onSubmit={handleSubmit((data) => {
+                const newUser = {
+                  id: {
+                    value: data.id,
+                  },
+                  name: {
+                    title: data.title,
+                    first: data.firstName,
+                    last: data.lastName,
+                  },
+                  email: data.email,
+                  location: {
+                    country: data.country,
+                    city: data.city,
+                    street: data.street,
+                  },
+                  picture: {
+                    large: "https://randomuser.me/api/portraits/women/62.jpg",
+                  },
+                  gender: "female",
+                };
+                dispatch(addUser(newUser));
+              })}
+            >
+              <div>
+                <label htmlFor="id" className="form-label">
+                  Id
+                </label>
+                <div className="input-group mb-3">
+                  <input
+                    type="text"
+                    id="id"
+                    className="form-control shadow-none"
+                    {...register("id")}
+                    value={nanoid()}
+                  />
+                </div>
+              </div>
+
               <div>
                 <label htmlFor="title" className="form-label">
                   Title
@@ -56,57 +95,60 @@ const EditUser = () => {
                     type="text"
                     id="title"
                     className="form-control shadow-none"
-                    placeholder="Enter Titel"
+                    placeholder="Enter Title"
                     {...register("title")}
                   />
                 </div>
 
                 {errors.title && (
                   <div className="alert alert-danger p-1" role="alert">
-                    {errors.titel?.message}
+                    {errors.title?.message}
                   </div>
                 )}
               </div>
+
               <div>
-                <label htmlFor="firstname" className="form-label">
+                <label htmlFor="firstName" className="form-label">
                   First Name
                 </label>
                 <div className="input-group mb-3">
                   <input
                     type="text"
-                    id="firstname"
+                    id="firstName"
                     className="form-control shadow-none"
                     placeholder="Enter first name"
-                    {...register("firstname")}
+                    {...register("firstName")}
                   />
                 </div>
 
-                {errors.firstname && (
+                {errors.firstName && (
                   <div className="alert alert-danger p-1" role="alert">
-                    {errors.firstname?.message}
+                    {errors.firstName?.message}
                   </div>
                 )}
               </div>
+
               <div>
-                <label htmlFor="lastname" className="form-label">
+                <label htmlFor="lastName" className="form-label">
                   Last Name
                 </label>
                 <div className="input-group mb-3">
                   <input
                     type="text"
-                    id="lastname"
+                    id="lastName"
                     className="form-control shadow-none"
                     placeholder="Enter last name"
-                    {...register("lastname")}
+                    {...register("lastName")}
                   />
                 </div>
 
-                {errors.lastname && (
+                {errors.lastName && (
                   <div className="alert alert-danger p-1" role="alert">
-                    {errors.lastname?.message}
+                    {errors.lastName?.message}
                   </div>
                 )}
               </div>
+
               <div>
                 <label htmlFor="email" className="form-label">
                   Email
@@ -116,7 +158,7 @@ const EditUser = () => {
                     type="text"
                     id="email"
                     className="form-control shadow-none"
-                    placeholder="Enter email"
+                    placeholder="example@gmail.com"
                     {...register("email")}
                   />
                 </div>
@@ -127,6 +169,7 @@ const EditUser = () => {
                   </div>
                 )}
               </div>
+
               <div>
                 <label htmlFor="country" className="form-label">
                   Country
@@ -147,6 +190,7 @@ const EditUser = () => {
                   </div>
                 )}
               </div>
+
               <div>
                 <label htmlFor="city" className="form-label">
                   City
@@ -167,6 +211,7 @@ const EditUser = () => {
                   </div>
                 )}
               </div>
+
               <div>
                 <label htmlFor="street" className="form-label">
                   Street
@@ -187,19 +232,9 @@ const EditUser = () => {
                   </div>
                 )}
               </div>
+
+              <input className="btn-primary" type="submit" value="Edit User" />
             </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-danger"
-              data-bs-dismiss="modal"
-            >
-              Cancel
-            </button>
-            <button type="submit" className="btn btn-primary">
-              Save changes
-            </button>
           </div>
         </div>
       </div>
@@ -207,4 +242,4 @@ const EditUser = () => {
   );
 };
 
-export default EditUser;
+export default AddUser;
