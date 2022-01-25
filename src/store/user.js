@@ -28,7 +28,6 @@ const { userCallRequest, userCallSuccess, userCallFail } = userSlice.actions;
 export default userSlice.reducer;
 
 export const fetchUserById = (id) => async (dispatch) => {
-  console.log(id);
   return dispatch(
     userCallBegan({
       id: id,
