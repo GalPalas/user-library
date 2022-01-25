@@ -15,7 +15,6 @@ const users =
 
     try {
       const { data } = await axios.get("https://randomuser.me/api/?results=10");
-      console.log(data.results);
 
       if (onSuccess) {
         dispatch({ type: onSuccess, payload: data.results });

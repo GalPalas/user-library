@@ -29,9 +29,7 @@ const userList = createSlice({
     useradded: (userList, action) => {
       userList.users.push(action.payload);
     },
-    userEdit: (userList, action) => {
-      console.log("edit");
-    },
+    userEdit: (userList, action) => {},
   },
 });
 

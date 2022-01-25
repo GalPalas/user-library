@@ -3,7 +3,7 @@ import EditUser from "components/editUser/EditUser";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeUser } from "store/users";
+import { removeUser, editUser } from "store/users";
 import "./UserCard.css";
 
 const UserCard = ({ id, name, email, picture, location, gender }) => {
@@ -13,14 +13,18 @@ const UserCard = ({ id, name, email, picture, location, gender }) => {
     dispatch(removeUser(id));
   };
 
+  const editUserHandler = (id) => {
+    dispatch(editUser(id));
+  };
+
   return (
     <div className="card p-2 mx-2 my-2" style={{ width: "15rem" }}>
       <div className="d-flex justify-content-end">
         <i
           className="bi bi-pencil-fill mx-1"
           data-bs-toggle="modal"
-          data-bs-target="#editModal"
-          // onClick={() => editUserHandler(id)}
+          data-bs-target="#editUserModal"
+          onClick={() => editUserHandler(id)}
         ></i>
         <i
           className="bi bi-trash-fill"

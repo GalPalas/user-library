@@ -27,15 +27,15 @@ const AddUser = () => {
   return (
     <div
       className="modal fade"
-      id="exampleModal"
+      id="addUserModal"
       tabIndex="-1"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="addUserModalLabel"
       aria-hidden="true"
     >
       <div className="modal-dialog modal-dialog-scrollable">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
+            <h5 className="modal-title" id="addUserModalLabel">
               Adding a user
             </h5>
             <button
@@ -233,20 +233,8 @@ const AddUser = () => {
                 )}
               </div>
 
-              <input type="submit" />
+              <input className="btn-primary" type="submit" value="Submit" />
             </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-danger"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="submit" className="btn btn-primary">
-              Save changes
-            </button>
           </div>
         </div>
       </div>
