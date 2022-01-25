@@ -27,6 +27,17 @@ const Users = () => {
               <UserCard key={user.id.value} {...user} />
             ))}
           </div>
+          <div className="row justify-content-end">
+            <div className="col-2">
+              <button
+                className="btn btn-secondary btn-lg"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Add User
+              </button>
+            </div>
+          </div>
         </div>
       ) : (
         <h2>Loading...</h2>
