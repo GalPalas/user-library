@@ -1,6 +1,6 @@
 # User Library - Gal Palas
 
-## Available Scripts
+## Operating Instructions
 
 In the project directory, you can run:
 
